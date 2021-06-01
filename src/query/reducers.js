@@ -1,3 +1,4 @@
+//每一个action都会流经每一个reducer
 import {
     ACTION_SET_FROM,
     ACTION_SET_TO,
@@ -54,16 +55,16 @@ const reducers = {
 
         return state;
     },
-    highSpeed(state = false, action) {
+    highSpeed(state = false, action) {//也要做一次数据联动
         const { type, payload } = action;
         let checkedTrainTypes;
 
         switch (type) {
             case ACTION_SET_HIGH_SPEED:
                 return payload;
-            case ACTION_SET_CHECKED_TRAIN_TYPES:
+            case ACTION_SET_CHECKED_TRAIN_TYPES://监听checkedTrainTypes的变化
                 checkedTrainTypes = payload;
-                return Boolean(checkedTrainTypes[1] && checkedTrainTypes[5]);
+                return Boolean(checkedTrainTypes[1] && checkedTrainTypes[5]);//综合筛选中选了key值为1和5的，也就相当于选了高铁动车
             default:
         }
 
@@ -129,7 +130,7 @@ const reducers = {
 
         return state;
     },
-    checkedTrainTypes(state = {}, action) {
+    checkedTrainTypes(state = {}, action) {//选中的车次类型
         const { type, payload } = action;
 
         let highSpeed;
@@ -138,14 +139,14 @@ const reducers = {
         switch (type) {
             case ACTION_SET_CHECKED_TRAIN_TYPES:
                 return payload;
-            case ACTION_SET_HIGH_SPEED:
+            case ACTION_SET_HIGH_SPEED://，捕获对highSpeed的更新如果在之前选择则过只看高铁，这里要做一个数据联动
                 highSpeed = payload;
-                newCheckedTrainTypes = { ...state };
+                newCheckedTrainTypes = { ...state };//拷贝一份当前的checkedTrainTypes
 
-                if (highSpeed) {
+                if (highSpeed) {//两个高铁动车的key分别是1和5
                     newCheckedTrainTypes[1] = true;
                     newCheckedTrainTypes[5] = true;
-                } else {
+                } else {//如果没选择高铁动车,则将这两个选项从可选项里面移出
                     delete newCheckedTrainTypes[1];
                     delete newCheckedTrainTypes[5];
                 }

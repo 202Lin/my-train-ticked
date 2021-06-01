@@ -137,7 +137,7 @@ export function fetchCityData() {//发起异步请求
 
         dispatch(setIsLoadingCityData(true));//把是否请求数据的状态改为真
 
-        axios.get('/static/cities.json')
+        axios.get('/static/cities')
             .then(
                 res => {
 

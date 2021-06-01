@@ -57,6 +57,7 @@ export function toggleHighSpeed() {
     };
 }
 export function setTrainList(trainList) {
+    console.log('action执行了')
     return {
         type: ACTION_SET_TRAIN_LIST,
         payload: trainList,
@@ -186,8 +187,8 @@ export function nextDate() {//切换到后一天
 }
 export function prevDate() {//切换到后一天
     return (dispatch, getState) => {
-        const { departDate } = getState();
+        const { departDate } = getState();//获取出发日期
 
-        dispatch(setDepartDate(h0(departDate) - 86400 * 1000));
+        dispatch(setDepartDate(h0(departDate) - 86400 * 1000));//将出发日期推后一天
     };
 }
