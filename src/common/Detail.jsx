@@ -35,6 +35,7 @@ const Detail = memo(function Detail(props) {
                 </div>
                 <div className="middle">
                     <p className="train-name">{trainNumber}</p>
+                    {/*  为了匹配不同的使用场景，让调用方去定义这块*/}
                     <p className="train-mid">{props.children}</p>
                     <p className="train-time">耗时{durationStr}</p>
                 </div>

@@ -142,8 +142,8 @@ function App(props) {
                     departStation={departStation}
                     arriveStation={arriveStation}
                     durationStr={durationStr}
-                    {...detailCbs}
                 >
+                    {/* 这个有点像vue里边的插槽，通过传入标签里边子组件来动态决定 */}
                     <span className="left"></span>
                     <span
                         className="schedule"
